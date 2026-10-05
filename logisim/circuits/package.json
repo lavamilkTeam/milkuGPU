@@ -1,0 +1,12 @@
+{
+  "name": "@lavaneko/circuits",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.js"
+  },
+  "dependencies": {
+    "@lavaneko/isa": "workspace:*"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "lavaneko",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.3.14",
+  "workspaces": ["cpu/isa", "logisim/circuits", "logisim/cli", "logisim/projects"],
+  "scripts": {
+    "build": "bun logisim/cli/index.js build",
+    "open": "open -a Logisim-evolution logisim/projects/Lavaneko16.circ",
+    "open:32": "open -a Logisim-evolution logisim/projects/Lavaneko32.circ",
+    "test": "bun test",
+    "verify:logisim": "bun logisim/cli/index.js verify",
+    "lint:boundaries": "depcruise --config .dependency-cruiser.cjs cpu logisim toolchain emulator studio tools",
+    "lint-dev": "biome check --write cpu logisim toolchain emulator studio tools .dependency-cruiser.cjs && npm run lint:boundaries",
+    "check": "npm run lint-dev && npm test && npm run build && npm run verify:logisim"
+  },
+  "devDependencies": {"@biomejs/biome": "2.5.15", "dependency-cruiser": "18.5.0"}
+}
