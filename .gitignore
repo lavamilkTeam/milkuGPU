@@ -1,6 +1,5 @@
-node_modules/
-.DS_Store
-*.circ.bak
-*.circ.autosave
-logisim/verification/*.log
-logisim/verification/*.png
+/build/
+*.vcd
+*.jou
+*.log
+.Xil/

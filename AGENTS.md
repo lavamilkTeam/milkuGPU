@@ -1,15 +1,13 @@
-# Lavaneko
+# Milku 工程约定
 
-This is a cpu/hardware/CPU monorepo, separate from the archived EcAI/Activepieces project.
-
-- Invoke code-boundary-standards before writing, reviewing, or testing code.
-- Read docs/architecture.md before changing circuit boundaries or the instruction format.
-- Package root entry points are public. lib/ and tests/ are private. Import workspace packages by their declared package exports.
-- Read docs/modules.md for monorepo layout and module boundaries.
-- Dependencies flow from logisim/cli to logisim/circuits to cpu/isa. ISA must not depend on Logisim, toolchain, emulator or Studio.
-- Toolchain owns compilation, assembly and linking; emulator owns execution; Studio owns the desktop UI and integration. Keep these separate from circuit generation.
-- Keep circuit source and reproducible generated .circ artifacts together. Do not claim screenshot reconstruction is an exact recovery of missing original subcircuits.
-- Run npm run lint-dev, npm test, npm run build, and npm run verify:logisim before completion.
-- Use named parameter objects for multi-argument functions. No any, forced type casts, or explanatory source comments.
-- No CPU behavior in a microcontroller, FPGA, or opaque custom Java component. Logisim subcircuits must remain inspectable.
-- Physical PCB designs must fit 100 x 100 mm per board, stack vertically, and follow pcb-routing-standards. Simulation artifacts are not manufacturing-ready schematics.
+- 修改、设计、评审和测试代码前使用 `code-boundary-standards`。
+- 文档使用 `.agents/skills/milku-docs/SKILL.md`，放在 `docs/`。
+- 先读 `docs/architecture.md` 和 `docs/interfaces.md`。
+- 本分支保留 Lavaneko 指令语义，使用 Verilog 实现；不沿用旧 Logisim 实现限制。
+- `rtl/lavaneko_core.v` 是核心入口；只通过端口接入指令和数据存储器。
+- 核心只依赖寄存器组、ALU 和乘除单元；这些模块不得依赖核心或测试代码。
+- `tests/` 使用公开端口验证，不通过内部层级读写处理器状态。
+- `scripts/` 负责验证、构建与 Vivado 集成，不属于处理器 RTL。
+- 模块端口、复位、握手和时序约定必须与文档一致。
+- 改动后运行 `make check` 与 `make synth`；未运行 Vivado 或板测不能声称 FPGA 验证通过。
+- 上游提交记录保留；来源与许可范围见 `THIRD_PARTY_NOTICES.md` 和 `LICENSE-SCOPE.md`。

@@ -1,8 +1,0 @@
-{
-  "name": "@lavaneko/logisim",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "open": "open -a Logisim-evolution Lavaneko16.circ"
-  }
-}

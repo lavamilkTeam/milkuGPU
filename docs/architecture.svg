@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-label="Lavaneko 核心结构">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z"/></marker></defs>
+<style>text{font-family:"Noto Sans CJK SC","Microsoft YaHei",sans-serif;font-size:18px;fill:#111}rect,path{stroke:#111;stroke-width:1.5;fill:none}.arrow{marker-end:url(#arrow)}.small{font-size:15px}.bold{font-weight:700}</style>
+<rect x="15" y="15" width="870" height="410"/><text x="35" y="45" class="bold">lavaneko_core · 端口之外的存储器由集成方提供</text>
+<rect x="40" y="85" width="130" height="65"/><text x="105" y="112" text-anchor="middle">PC / 取指</text><text x="105" y="135" text-anchor="middle" class="small">16 位字地址</text>
+<rect x="215" y="85" width="140" height="65"/><text x="285" y="112" text-anchor="middle">IR / 指令译码</text><text x="285" y="135" text-anchor="middle" class="small">W+16 位指令</text>
+<rect x="400" y="85" width="170" height="65"/><text x="485" y="112" text-anchor="middle">四个通用寄存器</text><text x="485" y="135" text-anchor="middle" class="small">两路读 · 一路写</text>
+<rect x="640" y="85" width="190" height="65"/><text x="735" y="112" text-anchor="middle">ALU</text><text x="735" y="135" text-anchor="middle" class="small">加减 · 零 / 进位</text>
+<rect x="640" y="200" width="190" height="65"/><text x="735" y="227" text-anchor="middle">迭代乘除单元</text><text x="735" y="250" text-anchor="middle" class="small">有符号 / 无符号</text>
+<rect x="400" y="320" width="170" height="65"/><text x="485" y="347" text-anchor="middle">写回选择 / 提交</text><text x="485" y="370" text-anchor="middle" class="small">寄存器 · Z/C · HI/LO</text>
+<rect x="40" y="320" width="240" height="65"/><text x="160" y="347" text-anchor="middle">数据存储器接口</text><text x="160" y="370" text-anchor="middle" class="small">16 位字地址 · W 位数据</text>
+<path class="arrow" d="M170 117H215"/><path class="arrow" d="M355 117H400"/><path class="arrow" d="M570 117H640"/>
+<path class="arrow" d="M605 117V232H640"/><path class="arrow" d="M830 117H855V352H570"/>
+<path class="arrow" d="M735 265V300H540V320"/><path class="arrow" d="M485 320V150"/><path class="arrow" d="M280 352H400"/>
+<path class="arrow" d="M285 150V285H160V320"/><text x="300" y="282" class="small">立即数地址</text>
+<text x="500" y="220" class="small">写回</text><text x="70" y="220" class="small">统一上升沿执行</text><text x="70" y="247" class="small">valid / ready 支持等待</text>
+</svg>

@@ -1,0 +1,28 @@
+{
+  "upstream": "lavamilkTeam/lavanekoCPU",
+  "commit": "8e249ae491903985db7ca79df683efa5b7946267",
+  "reference": "cpu/isa/index.js",
+  "seed": "0x13579bdf",
+  "cases": [
+    {
+      "width": 16,
+      "instructions": 3965,
+      "retirements": 3976,
+      "files": {
+        "program16.hex": "0d2e3260480523c9f60d798bf4b44915b7fde1369f1688c1f1b5549ff4f4247e",
+        "trace16.hex": "9c0c1c57e0482a9a9396155c58cccdc49893d0e24e2e7969b31d41f8bf71ce55",
+        "memory16.hex": "c8a2d459d066827e029248b354d9765946bd228c635cb6107d5cdab6ab41c226"
+      }
+    },
+    {
+      "width": 32,
+      "instructions": 3965,
+      "retirements": 3976,
+      "files": {
+        "program32.hex": "cd95fca511608517ea44733da81a2f1f65df1a45244be3df4b56e7de50339f9d",
+        "trace32.hex": "d6847d4cde4a2af825cf5e93ba33534ac063e846b32d89b460c74d2e54f6c587",
+        "memory32.hex": "5386202ea88e89387e35d9b2bac1105a07312f894fbb69ab1937506df1ee7a9b"
+      }
+    }
+  ]
+}
