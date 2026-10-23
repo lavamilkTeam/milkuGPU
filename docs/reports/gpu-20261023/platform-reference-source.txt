@@ -1,0 +1,4 @@
+Checkpoint C:/Users/Owner/a200t-validation/combined-cmt-r5-X1Y2-board-routed.dcp
+Part xc7a200tfbg484-2
+Vivado 2024.2
+Black boxes 0

@@ -2,6 +2,8 @@ milku
 
 # 接口
 
+并行入口 `milku_gpu` 见 [并行接口](gpu-interfaces.md)。下文为保留的 `lavaneko_core` 标量接口；其握手约定也用于并行入口外部存储端口。
+
 所有接口在 `clk` 上升沿采样。`reset` 高有效、同步清零内部状态；复位期间请求 valid 和 halted 被屏蔽。核心固定为 32 位数据和 32 位指令，不再提供 WIDTH 参数。
 
 ## 核心端口

@@ -3,3 +3,5 @@
 *.jou
 *.log
 .Xil/
+
+__pycache__/

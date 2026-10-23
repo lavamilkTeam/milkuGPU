@@ -1,0 +1,21 @@
+{
+  "isa": "R32 SIMD v1",
+  "cores": 4,
+  "lanes": 16,
+  "cases": [
+    {
+      "files": {
+        "program0.hex": "ec01eaf8d9ee6f9c9943e71304c3a4430e3deb6e5b44d0b5e9993c5598487b29",
+        "trace0.hex": "0b3105940c2efbac787bd24d666a96014498566e1b8cb9a37dc3fbdacb3c787e",
+        "program1.hex": "3435aa8e2643fbf2c9b5d5015e59dcb0c8b66386684dd71ac240678d02553860",
+        "trace1.hex": "42fa637b4ded9f6c845059daebd06223190db226e5474cc64e80cd4c2a1a146a",
+        "program2.hex": "4a247ee29a4551f3abf701ab69e819cdcbfc0a26a63b6fac71a46fa6c39bfdb5",
+        "trace2.hex": "46466cfc6355e36e446c063a91d8287157e8abe8ad464628bc6c4b30016a3468",
+        "program3.hex": "a2d2a14e2b7f9be4926a430395750b6bdc59c23f0db74b75e993bb879984e44c",
+        "trace3.hex": "f62498cf31cd1ab2d47485a7f66cde433240efe8112291da554b566f3828dcf1",
+        "memory.hex": "a08c0e716aeeab4054a3d84b81cfdbca913b322f91a323c4abbc12fe3d58a9d3",
+        "config.vh": "46ca5af45de9f02cc655f1db3bc5d34247c774cd0e2cd7e06a22d30654b37f36"
+      }
+    }
+  ]
+}

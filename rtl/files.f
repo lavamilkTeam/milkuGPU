@@ -2,3 +2,8 @@ rtl/lavaneko_alu.v
 rtl/lavaneko_regfile.v
 rtl/lavaneko_muldiv.v
 rtl/lavaneko_core.v
+rtl/milku_arbiter.v
+rtl/milku_dsp_muldiv.v
+rtl/milku_lane.v
+rtl/milku_simd_core.v
+rtl/milku_gpu.v

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="690" viewBox="0 0 1100 690">
+<style>text{font-family:"Noto Sans CJK SC","Microsoft YaHei",sans-serif;fill:#111;text-anchor:middle;font-size:20px}.title{font-size:30px;font-weight:700}.small{font-size:18px}rect{fill:white;stroke:#111;stroke-width:2}path{fill:none;stroke:#111;stroke-width:2;marker-end:url(#a)}</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" style="fill:#111;stroke:none;marker-end:none"/></marker></defs>
+<rect x="0" y="0" width="1100" height="690" style="stroke:none"/>
+<text x="40" y="35" style="text-anchor:start;font-weight:700">milku</text>
+<text x="550" y="85" class="title">4 核心 × 16 通道</text>
+<rect x="35" y="125" width="235" height="300"/>
+<text x="152.5" y="162" style="font-weight:700">核心 0</text>
+<rect x="50" y="185" width="205" height="65"/>
+<text x="152.5" y="223" class="small">PC · 取指 · 译码</text>
+<path d="M152.5 250V280"/>
+<rect x="50" y="285" width="205" height="60"/>
+<text x="152.5" y="322">16 条 lane</text>
+<path d="M152.5 345V370"/>
+<text x="152.5" y="402" class="small">核心内访存仲裁</text>
+<path d="M152.5 425V465H550"/>
+<rect x="300" y="125" width="235" height="300"/>
+<text x="417.5" y="162" style="font-weight:700">核心 1</text>
+<rect x="315" y="185" width="205" height="65"/>
+<text x="417.5" y="223" class="small">PC · 取指 · 译码</text>
+<path d="M417.5 250V280"/>
+<rect x="315" y="285" width="205" height="60"/>
+<text x="417.5" y="322">16 条 lane</text>
+<path d="M417.5 345V370"/>
+<text x="417.5" y="402" class="small">核心内访存仲裁</text>
+<path d="M417.5 425V465H550"/>
+<rect x="565" y="125" width="235" height="300"/>
+<text x="682.5" y="162" style="font-weight:700">核心 2</text>
+<rect x="580" y="185" width="205" height="65"/>
+<text x="682.5" y="223" class="small">PC · 取指 · 译码</text>
+<path d="M682.5 250V280"/>
+<rect x="580" y="285" width="205" height="60"/>
+<text x="682.5" y="322">16 条 lane</text>
+<path d="M682.5 345V370"/>
+<text x="682.5" y="402" class="small">核心内访存仲裁</text>
+<path d="M682.5 425V465H550"/>
+<rect x="830" y="125" width="235" height="300"/>
+<text x="947.5" y="162" style="font-weight:700">核心 3</text>
+<rect x="845" y="185" width="205" height="65"/>
+<text x="947.5" y="223" class="small">PC · 取指 · 译码</text>
+<path d="M947.5 250V280"/>
+<rect x="845" y="285" width="205" height="60"/>
+<text x="947.5" y="322">16 条 lane</text>
+<path d="M947.5 345V370"/>
+<text x="947.5" y="402" class="small">核心内访存仲裁</text>
+<path d="M947.5 425V465H550"/>
+<path d="M550 465V490"/>
+<rect x="335" y="495" width="430" height="60"/><text x="550" y="533">核心间访存仲裁 → 数据接口</text>
+<text x="550" y="601">每条 lane：32×32 位寄存器 · ALU · DSP 乘法 · 迭代除法</text>
+<text x="550" y="640" class="small">取指另有核心间仲裁；图中省略取指存储器与返回线。</text>
+<text x="550" y="674" class="small">DDR / PCIe 控制器尚未接入。</text>
+</svg>

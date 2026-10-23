@@ -14,3 +14,14 @@ for width in 32; do
     " > "build/synth$width.log"
     echo "PASS synthesis WIDTH=$width (generic cells, not FPGA timing)"
 done
+
+${YOSYS:-yosys} -Q -T -p "
+    read_verilog $(tr '\n' ' ' < rtl/files.f);
+    hierarchy -check -top milku_gpu;
+    synth -top milku_gpu -noabc;
+    check -assert;
+    select -assert-none t:\$dlatch t:\$_DLATCH_*;
+    stat;
+    write_json build/gpu.json
+" > build/synth-gpu.log
+echo "PASS GPU synthesis CORES=4 LANES=16 (generic cells)"

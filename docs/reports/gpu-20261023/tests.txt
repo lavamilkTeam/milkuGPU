@@ -1,0 +1,39 @@
+python3 scripts/check_boundaries.py
+PASS RTL boundaries and reference fixture hashes
+IVERILOG="/home/dev/.local/opt/milku-tools/usr/bin/iverilog" VVP="/home/dev/.local/opt/milku-tools/usr/bin/vvp" IVERILOG_FLAGS="-B /home/dev/.local/opt/milku-tools/usr/lib/x86_64-linux-gnu/ivl" sh scripts/test.sh
+PASS core WIDTH=32 STALLS=1 retirements=6499 cycles=45531
+tests/tb_core.v:103: $finish called at 455350000 (1ps)
+PASS muldiv WIDTH=32 DSP=0 operations=659
+tests/tb_muldiv.v:109: $finish called at 252110000 (1ps)
+PASS control reset/stall/PC-wrap
+tests/tb_control.v:73: $finish called at 410000 (1ps)
+PASS regfile WIDTH=32 32 registers, all read pairs, reset priority
+tests/tb_regfile.v:48: $finish called at 5514000 (1ps)
+PASS core WIDTH=32 STALLS=0 retirements=6499 cycles=38729
+tests/tb_core.v:103: $finish called at 387330000 (1ps)
+PASS GPU CORES=2 divergence/isolation/uniform branches/masks/busy launch/reset/fetch-store-division/PC wrap
+tests/tb_gpu_control.v:118: $finish called at 2660000 (1ps)
+PASS GPU 2x16 STALLS=0 full/masked relaunch, 28380 cycles, 2086 stores
+tests/tb_gpu.v:111: $finish called at 283830000 (1ps)
+PASS GPU 2x16 STALLS=1 full/masked relaunch, 36137 cycles, 2086 stores
+tests/tb_gpu.v:111: $finish called at 361400000 (1ps)
+PASS GPU CORES=4 divergence/isolation/uniform branches/masks/busy launch/reset/fetch-store-division/PC wrap
+tests/tb_gpu_control.v:118: $finish called at 2660000 (1ps)
+PASS GPU 4x16 STALLS=0 full/masked relaunch, 37823 cycles, 4111 stores
+tests/tb_gpu.v:111: $finish called at 378260000 (1ps)
+PASS GPU 4x16 STALLS=1 full/masked relaunch, 54986 cycles, 4111 stores
+tests/tb_gpu.v:111: $finish called at 549890000 (1ps)
+PASS arbiter CLIENTS=1 locked grant/fairness/reset
+tests/tb_arbiter.v:49: $finish called at 230000 (1ps)
+PASS arbiter CLIENTS=3 locked grant/fairness/reset
+tests/tb_arbiter.v:49: $finish called at 430000 (1ps)
+PASS arbiter CLIENTS=4 locked grant/fairness/reset
+tests/tb_arbiter.v:49: $finish called at 530000 (1ps)
+PASS muldiv WIDTH=32 DSP=1 operations=659
+tests/tb_muldiv.v:109: $finish called at 149460000 (1ps)
+YOSYS="/home/dev/.local/opt/milku-tools/usr/bin/yosys" sh scripts/synth.sh
+PASS synthesis WIDTH=32 (generic cells, not FPGA timing)
+PASS GPU synthesis CORES=4 LANES=16 (generic cells)
+
+Four-core vector regeneration matched all fixtures byte-for-byte.
+Remote four-core RTL and Vivado build script matched local source byte-for-byte.

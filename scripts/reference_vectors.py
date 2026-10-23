@@ -31,12 +31,14 @@ def encode(op, rd=0, ra=0, rb=0, imm=0):
     return opcode << 26 | rd << 21 | ra << 16 | low
 
 
-def trace(words, limit=30000):
+def trace(words, limit=30000, gpu_identity=None, initial_memory=None):
     registers = [0] * 32
-    memory = {}
+    memory = dict(initial_memory or {})
     pc = lo = hi = zero = carry = error = 0
     rows = []
     names = {value: key for key, value in OPS.items()}
+    if gpu_identity is not None:
+        names.update({20: "LANEID", 21: "COREID", 22: "TASKID"})
     for _ in range(limit):
         word = words[pc]
         op = names.get(word >> 26, 'NOP')
@@ -46,7 +48,8 @@ def trace(words, limit=30000):
         next_pc = (pc + 1) & 65535
         result = None
         halted = int(op == 'HALT')
-        if op == 'LDI': result = immediate & MASK
+        if op in ('LANEID', 'COREID', 'TASKID'): result = gpu_identity[op] & MASK
+        elif op == 'LDI': result = immediate & MASK
         elif op == 'LUI': result = (word & 65535) << 16
         elif op == 'ORI': result = a | (word & 65535)
         elif op in ('ADD', 'ADDI', 'SUB', 'CMP'):

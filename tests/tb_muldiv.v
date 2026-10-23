@@ -2,6 +2,7 @@
 `timescale 1ns/1ps
 module tb_muldiv;
     parameter WIDTH = 32;
+    parameter DSP = 0;
     reg clk = 0;
     always #5 clk=~clk;
     reg reset = 1, request_valid = 0, divide = 0, signed_mode = 0, result_ready = 0;
@@ -12,11 +13,19 @@ module tb_muldiv;
     reg [WIDTH-1:0] inputs [0:7];
     reg [31:0] rng=32'h12345678;
     integer i,j,k,checks=0;
+    generate if(DSP) begin: dsp_unit
+    milku_dsp_muldiv #(.WIDTH(WIDTH)) dut (
+        .clk(clk),.reset(reset),.request_valid(request_valid),.request_ready(request_ready),
+        .divide(divide),.signed_mode(signed_mode),.a(a),.b(b),.result_valid(result_valid),
+        .result_ready(result_ready),.lo(lo),.hi(hi),.error(error)
+    );
+    end else begin: logic_unit
     lavaneko_muldiv #(.WIDTH(WIDTH)) dut (
         .clk(clk),.reset(reset),.request_valid(request_valid),.request_ready(request_ready),
         .divide(divide),.signed_mode(signed_mode),.a(a),.b(b),.result_valid(result_valid),
         .result_ready(result_ready),.lo(lo),.hi(hi),.error(error)
     );
+    end endgenerate
     task run;
         input [WIDTH-1:0] left,right;
         input is_division,is_signed;
@@ -51,7 +60,7 @@ module tb_muldiv;
                 @(negedge clk);latency=latency+1;
                 if(latency>WIDTH+3) $fatal(1,"muldiv timeout");
             end
-            if(latency !== (expected_error ? 2 : WIDTH+2)) $fatal(1,"wrong latency %0d",latency);
+            if(latency !== (expected_error ? 2 : (DSP && !is_division ? 3 : WIDTH+2))) $fatal(1,"wrong latency %0d",latency);
             if ({error,hi,lo} !== {expected_error,expected_hi,expected_lo})
                 $fatal(1,"muldiv mismatch left=%h right=%h divide=%b signed=%b",left,right,is_division,is_signed);
             request_valid=1;
@@ -83,7 +92,7 @@ module tb_muldiv;
         for(i=0;i<2;i=i+1) begin
             @(negedge clk);a=31;b=7;divide=i[0];request_valid=1;
             @(negedge clk);request_valid=0;
-            repeat(5) @(negedge clk);
+            repeat((DSP && !i) ? 1 : 5) @(negedge clk);
             reset=1;
             @(negedge clk);
             if(result_valid || lo || hi || error) $fatal(1,"reset during operation");
@@ -97,6 +106,6 @@ module tb_muldiv;
         @(negedge clk);
         if(result_valid || lo || hi || error) $fatal(1,"reset pending result");
         reset=0;run(1,1,0,0);
-        $display("PASS muldiv WIDTH=%0d operations=%0d",WIDTH,checks);$finish;
+        $display("PASS muldiv WIDTH=%0d DSP=%0d operations=%0d",WIDTH,DSP,checks);$finish;
     end
 endmodule

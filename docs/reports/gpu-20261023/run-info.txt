@@ -1,0 +1,11 @@
+Vivado 2024.2
+Part xc7a200tfbg484-2
+Top milku_gpu
+CORES 4
+LANES 16
+Clock period 20.0 ns
+I/O delay 2.0 ns
+Clock uncertainty 0.2 ns
+Mode out_of_context; excludes MIG/DDR, PCIe, board pins
+Worst setup slack 1.305
+Worst hold slack 0.003
