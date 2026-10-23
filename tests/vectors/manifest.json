@@ -1,27 +1,18 @@
 {
-  "upstream": "lavamilkTeam/lavanekoCPU",
-  "commit": "8e249ae491903985db7ca79df683efa5b7946267",
-  "reference": "cpu/isa/index.js",
+  "isa": "Milku R32 v1",
+  "reference": "scripts/reference_vectors.py",
   "seed": "0x13579bdf",
   "cases": [
     {
-      "width": 16,
-      "instructions": 3965,
-      "retirements": 3976,
-      "files": {
-        "program16.hex": "0d2e3260480523c9f60d798bf4b44915b7fde1369f1688c1f1b5549ff4f4247e",
-        "trace16.hex": "9c0c1c57e0482a9a9396155c58cccdc49893d0e24e2e7969b31d41f8bf71ce55",
-        "memory16.hex": "c8a2d459d066827e029248b354d9765946bd228c635cb6107d5cdab6ab41c226"
-      }
-    },
-    {
       "width": 32,
-      "instructions": 3965,
-      "retirements": 3976,
+      "registers": 32,
+      "instructions": 6492,
+      "retirements": 6499,
       "files": {
-        "program32.hex": "cd95fca511608517ea44733da81a2f1f65df1a45244be3df4b56e7de50339f9d",
-        "trace32.hex": "d6847d4cde4a2af825cf5e93ba33534ac063e846b32d89b460c74d2e54f6c587",
-        "memory32.hex": "5386202ea88e89387e35d9b2bac1105a07312f894fbb69ab1937506df1ee7a9b"
+        "program32.hex": "c7c8fe4762a51419178d664f78f750dae25c73e9edcc9d527d36217ef4bd1b33",
+        "trace32.hex": "3af01b21628ef99a5cdf5d63cef56f7915f99430ab2375a4fb67d05d4325337b",
+        "memory32.hex": "8ea9d47dc47754b53a611f7e9503c06da4786108e39cbf6ae35f758255832145",
+        "config.vh": "4347c6c16f3459bf8cc0c96a00294662e8e4b826e8b1fb5e0bda919a5768cabe"
       }
     }
   ]

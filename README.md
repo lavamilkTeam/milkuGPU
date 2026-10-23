@@ -1,8 +1,12 @@
 <div align="left">milku</div>
 
-# Lavaneko Verilog 核心
+# Milku R32 核心
 
-Lavaneko 现有指令集的可综合 Verilog 实现，支持 16/32 位数据通路、四个通用寄存器和 18 条命名指令。当前是单通道整数 CPU 核心；尚无 SIMD、浮点、图形流水线、Linux 显卡驱动或 Unity 支持。
+自定义 32 位定长指令集，32 个 32 位可写通用寄存器，20 个操作码。当前是单通道整数核心，尚无 SIMD、浮点、图形流水线或 Unity 支持。
+
+![主数据通路](docs/architecture.svg)
+
+[架构图 SVG](docs/architecture.svg) · [PNG](docs/architecture.png)
 
 - [图解与指令集](docs/lavaneko.html) · [PDF](docs/lavaneko.pdf)
 - [架构](docs/architecture.md) · [端口与握手](docs/interfaces.md)
@@ -11,7 +15,7 @@ Lavaneko 现有指令集的可综合 Verilog 实现，支持 16/32 位数据通�
 
 ```text
 rtl/       核心、寄存器组、ALU、迭代乘除单元
-tests/    Verilog 测试与上游参考模型生成的固定向量
+tests/    Verilog 测试与R32 参考模型生成的固定向量
 scripts/   检查、参考向量生成、综合与 Vivado 工程入口
 docs/      中文文档、可编辑 HTML/SVG 和 PDF
 ```
@@ -24,9 +28,9 @@ make synth  # Yosys；通用综合，不代表器件时序通过
 Vivado 工程需要完整器件型号，`200T` 本身不能确定封装和速度等级：
 
 ```sh
-vivado -mode batch -source scripts/create_project.tcl -tclargs <完整器件型号> 32
+vivado -mode batch -source scripts/create_project.tcl -tclargs <完整器件型号>
 ```
 
 该脚本只建立核心工程。外部存储器、主机接口、时钟约束和引脚约束须由集成工程提供；本仓库未生成可上板 bitstream。
 
-基线是 `lavamilkTeam/lavanekoCPU` 的 `8e249ae491903985db7ca79df683efa5b7946267`。保留其提交历史和指令结果语义；工作树移除 Logisim、桌面应用及预留编译工具链，新增 RTL 与必要验证脚本。旧工程可从基线提交恢复。
+旧 Lavaneko 兼容版保存在提交 `6f8f281`。当前版本重新定义了指令编码，旧程序需要重新编码；完整 32 位常数使用 LUI + ORI，访存支持基址加偏移。原始 Logisim 与旧四寄存器实现均可从 Git 历史恢复。

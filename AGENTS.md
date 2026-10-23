@@ -3,7 +3,7 @@
 - 修改、设计、评审和测试代码前使用 `code-boundary-standards`。
 - 文档使用 `.agents/skills/milku-docs/SKILL.md`，放在 `docs/`。
 - 先读 `docs/architecture.md` 和 `docs/interfaces.md`。
-- 本分支保留 Lavaneko 指令语义，使用 Verilog 实现；不沿用旧 Logisim 实现限制。
+- 本分支实现 Milku R32 v1：32 个 32 位通用寄存器和 32 位定长指令；不兼容旧控制字。修改 ISA 时同步修改参考模型、固定向量和文档。
 - `rtl/lavaneko_core.v` 是核心入口；只通过端口接入指令和数据存储器。
 - 核心只依赖寄存器组、ALU 和乘除单元；这些模块不得依赖核心或测试代码。
 - `tests/` 使用公开端口验证，不通过内部层级读写处理器状态。

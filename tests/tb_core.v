@@ -1,28 +1,28 @@
 // SPDX-License-Identifier: LicenseRef-Milku-Commercial-1.0
 `timescale 1ns/1ps
 module tb_core;
-    parameter WIDTH = 32;
+    localparam WIDTH = 32;
     parameter STALLS = 1;
-    localparam WORDS = 3965;
-    localparam STEPS = 3976;
-    localparam TRACE_WIDTH = 53 + 7*WIDTH;
+    `include "tests/vectors/config.vh"
+    localparam TRACE_WIDTH = 1195;
     reg clk = 0;
     always #5 clk = ~clk;
     reg reset = 1;
     wire iv, mv, mw, halted, z, c, retired, rw;
     wire [15:0] ia, ma, rpc;
     wire [WIDTH-1:0] wd, lo, hi, rd;
-    wire [WIDTH+15:0] ri;
-    wire [1:0] error, dest;
-    reg [WIDTH+15:0] rom [0:65535];
+    wire [31:0] ri;
+    wire [1:0] error;
+    wire [4:0] dest;
+    reg [31:0] rom [0:65535];
     reg [WIDTH-1:0] ram [0:65535];
     reg [WIDTH-1:0] expected_memory [0:65535];
     reg [TRACE_WIDTH-1:0] expected [0:STEPS-1];
-    reg [WIDTH-1:0] shadow [0:3];
+    reg [WIDTH-1:0] shadow [0:31];
     reg [31:0] random_state = 32'h98172345;
     wire ir = !STALLS || random_state[0];
     wire mr = !STALLS || random_state[3];
-    wire [WIDTH+15:0] idata = rom[ia];
+    wire [31:0] idata = rom[ia];
     wire [WIDTH-1:0] md = ram[ma];
     integer i, step = 0, cycles = 0;
     reg [TRACE_WIDTH-1:0] observed;
@@ -32,7 +32,7 @@ module tb_core;
     reg [WIDTH-1:0] previous_wd;
     reg [15:0] halted_pc;
 
-    lavaneko_core #(.WIDTH(WIDTH)) dut (
+    lavaneko_core dut (
         .clk(clk), .reset(reset), .instruction_valid(iv), .instruction_ready(ir),
         .instruction_address(ia), .instruction_data(idata), .memory_valid(mv),
         .memory_ready(mr), .memory_write(mw), .memory_address(ma),
@@ -67,7 +67,9 @@ module tb_core;
         if (!reset && retired) begin
             if (step >= STEPS) $fatal(1, "extra retirement");
             if (rw) shadow[dest] = rd;
-            observed = {rpc,ri,ia,shadow[0],shadow[1],shadow[2],shadow[3],lo,hi,z,c,error,halted};
+            observed = {rpc,ri,ia};
+            for (i=0; i<32; i=i+1) observed = (observed << 32) | shadow[i];
+            observed = (observed << 107) | {lo,hi,z,c,error,halted,rw,dest,rd};
             if (observed !== expected[step]) begin
                 $display("step=%0d pc=%h instruction=%h", step, rpc, ri);
                 $display("expected=%h actual=%h", expected[step], observed);
@@ -77,17 +79,11 @@ module tb_core;
         end
     end
     initial begin
-        for (i=0; i<65536; i=i+1) begin rom[i]= 'h40; ram[i]=0; expected_memory[i]=0; end
-        for (i=0; i<4; i=i+1) shadow[i]=0;
-        if (WIDTH == 16) begin
-            $readmemh("tests/vectors/program16.hex",rom,0,WORDS-1);
-            $readmemh("tests/vectors/trace16.hex",expected);
-            $readmemh("tests/vectors/memory16.hex",expected_memory);
-        end else begin
-            $readmemh("tests/vectors/program32.hex",rom,0,WORDS-1);
-            $readmemh("tests/vectors/trace32.hex",expected);
-            $readmemh("tests/vectors/memory32.hex",expected_memory);
-        end
+        for (i=0; i<65536; i=i+1) begin rom[i]=32'h30000000; ram[i]=0; expected_memory[i]=0; end
+        for (i=0; i<32; i=i+1) shadow[i]=0;
+        $readmemh("tests/vectors/program32.hex",rom,0,WORDS-1);
+        $readmemh("tests/vectors/trace32.hex",expected);
+        $readmemh("tests/vectors/memory32.hex",expected_memory);
         repeat (3) @(negedge clk);
         reset = 0;
         wait(halted);

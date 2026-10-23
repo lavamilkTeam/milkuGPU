@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: LicenseRef-Milku-Commercial-1.0
-"""Check the small RTL module graph and fixed upstream reference fixtures."""
+"""Check the small RTL module graph and Milku R32 reference fixtures."""
 import hashlib
 import json
 from pathlib import Path
